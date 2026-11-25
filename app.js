@@ -7,7 +7,7 @@
  *
  * Two options only: Loop (top pill) and Play (big circle). No library,
  * no reverb, no extra text. The screen stays alive with a slow gradient,
- * drifting orbs (CSS) and real petals (canvas-drawn petal shapes).
+ * drifting orbs (CSS). (Petals were removed on Manmohan's word, 2026-11-25.)
  */
 
 (function () {
@@ -21,7 +21,6 @@
   var loopBtn = document.getElementById('loopBtn');
   var progressWrap = document.getElementById('progressWrap');
   var progressFill = document.getElementById('progressFill');
-  var petalCanvas = document.getElementById('petals');
 
   // ---------- State ----------
   var player = null;
@@ -166,96 +165,9 @@
     }
   });
 
-  // ---------- Real petals (canvas): petal shapes, slow fall + sway ----------
-  var petals = [];
-  var petalCtx = null;
-  var reduceMotion = window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var PETAL_COLORS = [
-    'rgba(255, 255, 255, 0.85)',
-    'rgba(255, 214, 224, 0.75)',
-    'rgba(242, 227, 184, 0.75)',
-    'rgba(255, 255, 255, 0.55)',
-    'rgba(255, 183, 197, 0.6)'
-  ];
-
-  function sizeCanvas() {
-    var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    petalCanvas.width = Math.floor(window.innerWidth * dpr);
-    petalCanvas.height = Math.floor(window.innerHeight * dpr);
-    petalCanvas.style.width = window.innerWidth + 'px';
-    petalCanvas.style.height = window.innerHeight + 'px';
-    if (petalCtx) petalCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function newPetal(anywhere) {
-    var w = window.innerWidth, h = window.innerHeight;
-    return {
-      x: Math.random() * w,
-      y: anywhere ? Math.random() * h : -30 - Math.random() * 60,
-      size: 9 + Math.random() * 11,
-      fall: 0.25 + Math.random() * 0.45,
-      swayAmp: 18 + Math.random() * 26,
-      swaySpeed: 0.0004 + Math.random() * 0.0006,
-      phase: Math.random() * Math.PI * 2,
-      rot: Math.random() * Math.PI * 2,
-      rotSpeed: (Math.random() - 0.5) * 0.0006,
-      color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
-      alpha: 0.5 + Math.random() * 0.4
-    };
-  }
-
-  function drawPetal(ctx, p) {
-    var s = p.size;
-    ctx.save();
-    ctx.translate(p.x, p.y);
-    ctx.rotate(p.rot);
-    ctx.globalAlpha = p.alpha;
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.moveTo(0, -s);
-    ctx.bezierCurveTo(s * 0.95, -s * 0.35, s * 0.9, s * 0.55, 0, s);
-    ctx.bezierCurveTo(-s * 0.9, s * 0.55, -s * 0.95, -s * 0.35, 0, -s);
-    ctx.fill();
-    ctx.restore();
-  }
-
-  function startPetals() {
-    if (!petalCanvas || !petalCanvas.getContext) return;
-    petalCtx = petalCanvas.getContext('2d');
-    sizeCanvas();
-    for (var i = 0; i < 22; i++) petals.push(newPetal(true));
-    if (reduceMotion) {
-      petals.forEach(function (p) { drawPetal(petalCtx, p); });
-      return;
-    }
-    var last = 0;
-    function frame(now) {
-      var dt = Math.min(50, now - last);
-      last = now;
-      var w = window.innerWidth, h = window.innerHeight;
-      petalCtx.clearRect(0, 0, w, h);
-      for (var i = 0; i < petals.length; i++) {
-        var p = petals[i];
-        p.y += p.fall * dt;
-        p.x += Math.sin(now * p.swaySpeed + p.phase) * 0.35;
-        p.rot += p.rotSpeed * dt;
-        if (p.y > h + 40) { petals[i] = newPetal(false); continue; }
-        if (p.x < -40) p.x = w + 30;
-        if (p.x > w + 40) p.x = -30;
-        drawPetal(petalCtx, p);
-      }
-      requestAnimationFrame(frame);
-    }
-    requestAnimationFrame(frame);
-  }
-
-  window.addEventListener('resize', sizeCanvas);
-
   // ---------- Init ----------
   setLoop(true);
   startProgressTimer();
-  startPetals();
   // Play focused on load (remote: Space/Enter starts it right away).
   try { playBtn.focus({ preventScroll: true }); } catch (e) { playBtn.focus(); }
 
@@ -264,7 +176,6 @@
     url: 'https://www.youtube.com/watch?v=' + VIDEO_ID,
     isPlaying: function () { return isPlaying; },
     isLoopOn: function () { return loopOn; },
-    petalCount: function () { return petals.length; },
     getProgress: function () {
       var cur = (ytReady && player && player.getCurrentTime) ? player.getCurrentTime() : 0;
       return { cur: cur, dur: duration };

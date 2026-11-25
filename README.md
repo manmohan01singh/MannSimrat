@@ -26,10 +26,10 @@ text. v3 is the simple version he wanted:
   “Mann Simrat · Arijit Singh”. No notes, no footer, no hints.
 - **No reverb.** Removed entirely — it never processed the YouTube
   track anyway, so the option is gone, not hidden.
-- **The screen stays alive.** Slow-shifting cream/teal/gold gradient,
-  five large drifting orbs, and **real petals** — petal shapes drawn on
-  canvas, falling slowly with a sway and a turn. Nothing fake-looking,
-  nothing still. `prefers-reduced-motion` stops the motion.
+- **The screen stays alive.** Slow-shifting cream/teal/gold gradient
+  and five large drifting orbs. (Falling petals were in the first v3
+  build and removed the same day on Manmohan's word.)
+  `prefers-reduced-motion` stops the motion.
 - Big album art in the centre (official thumbnail, `maxresdefault.jpg`
   with `hqdefault.jpg` fallback), soft shadow + teal glow, 28px radius.
 - A thin quiet progress line under the title — no numbers, click to seek.
@@ -39,8 +39,8 @@ text. v3 is the simple version he wanted:
 | File | What it is |
 | --- | --- |
 | `index.html` | Loop pill, album art, two-line title, progress line, Play circle, hidden YouTube player |
-| `styles.css` | Living gradient background, orbs, canvas petals, frosted Loop pill, big Play circle, TV-first layout (no scroll at 1920×1080) |
-| `app.js` | YouTube IFrame API playback (single video), Loop, Play/Pause, progress + seek, real-petal canvas animation, keyboard shortcuts |
+| `styles.css` | Living gradient background, drifting orbs, frosted Loop pill, big Play circle, TV-first layout (no scroll at 1920×1080) |
+| `app.js` | YouTube IFrame API playback (single video), Loop, Play/Pause, progress + seek, keyboard shortcuts |
 | `README.md` | This file |
 
 ## Run locally

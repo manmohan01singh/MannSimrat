@@ -3,8 +3,8 @@
    one track only (Mann Simrat Thanda Theevan Jeeo), big album art in the
    centre, two options only — Loop (top, above Play) and Play — almost no
    text, no library, no reverb, no notes. The screen itself stays alive:
-   a slow-shifting gradient, drifting orbs, and real petals falling
-   (canvas-drawn petal shapes, not dots). TV-first, 1920x1080, no scroll. */
+   a slow-shifting gradient and drifting orbs. (Petals were removed on
+   Manmohan's word, 2026-11-25.) TV-first, 1920x1080, no scroll. */
 
 :root {
   --cream: #fffdf7;
@@ -65,14 +65,6 @@ body {
 @keyframes drift {
   from { transform: translate3d(0, 0, 0) scale(1); }
   to   { transform: translate3d(36px, -30px, 0) scale(1.12); }
-}
-
-/* ---- Petals: real petal shapes, drawn on canvas by app.js ---- */
-#petals {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
 }
 
 /* ---- Stage: everything centred, one column ---- */
@@ -221,6 +213,5 @@ body {
 /* Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   .bg, .orb { animation: none !important; }
-  #petals { display: none; }
   * { transition-duration: 0.01ms !important; }
 }
