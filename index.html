@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mann Simrat — Thanda Theevan Jeeo</title>
+  <meta name="description" content="MannSimrat — Sabad Naad loop player. Mann Simrat Thanda Theevan Jeeo — ਮਨ ਸਿਮਰਤ ਠੰਢਾ ਥੀਵੈ ਜੀਉ by Padma Shri Arijit Singh, Sabad Naad Vol 5, Raag Maajh. Bani by Sri Guru Arjan Dev Ji. 20 verified Sabad Naad tracks, loops seamlessly on TV. Audio streams from the official Sabad Naad YouTube videos. No audio hosted here.">
+  <meta property="og:title" content="Mann Simrat — Thanda Theevan Jeeo">
+  <meta property="og:description" content="Padma Shri Arijit Singh • Sabad Naad Vol 5 • Raag Maajh • Bani: Sri Guru Arjan Dev Ji • 20 verified Sabad Naad tracks">
+  <meta property="og:image" content="https://i.ytimg.com/vi/KQ-wcUDV2a8/maxresdefault.jpg">
+  <meta property="og:type" content="music.song">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gurmukhi:wght@500;600;700&family=Noto+Serif+Gurmukhi:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+</head>
+<body>
+  <!-- Gentle light from the edges, centred on the album art -->
+  <div class="bg-glow" aria-hidden="true"></div>
+
+  <!-- Magical orbs: CSS-only, 6 soft drifting orbs (subtler in v2) -->
+  <div class="orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+    <span class="orb orb-4"></span>
+    <span class="orb orb-5"></span>
+    <span class="orb orb-6"></span>
+  </div>
+
+  <!-- Petals: CSS-only, 10 gentle falling petals (subtler in v2) -->
+  <div class="petals" aria-hidden="true">
+    <span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span>
+    <span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span>
+    <span class="petal p7"></span><span class="petal p8"></span><span class="petal p9"></span>
+    <span class="petal p10"></span>
+  </div>
+
+  <div class="app">
+    <main class="stage">
+      <p class="eyebrow" id="eyebrow">Sabad Naad &nbsp;•&nbsp; Vol 5 &nbsp;•&nbsp; Raag Maajh</p>
+
+      <!-- Album art -->
+      <figure class="album-card">
+        <img id="albumArt"
+             src="https://i.ytimg.com/vi/KQ-wcUDV2a8/maxresdefault.jpg"
+             onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/KQ-wcUDV2a8/hqdefault.jpg';"
+             alt="Mann Simrat Thanda Theevan Jeeo — official Sabad Naad thumbnail"
+             width="1280" height="720" fetchpriority="high">
+        <span class="now-playing" id="nowPlaying" hidden>▶&nbsp; Now playing</span>
+        <span class="reverb-indicator" id="reverbIndicator" hidden>●&nbsp; Reverb on</span>
+      </figure>
+
+      <h1 class="title-gurmukhi" id="titleGu" lang="pa">ਮਨ ਸਿਮਰਤ ਠੰਢਾ ਥੀਵੈ ਜੀਉ</h1>
+      <p class="title-english" id="titleEn">Mann Simrat Thanda Theevan Jeeo</p>
+      <p class="meta" id="metaLine">Padma Shri Arijit Singh &nbsp;•&nbsp; Sabad Naad Vol 5 &nbsp;•&nbsp; Raag Maajh<br>
+      <span class="bani" id="baniLine">Bani by Sri Guru Arjan Dev Ji</span></p>
+
+      <!-- Source badge -->
+      <p class="source-badge" id="sourceBadge">Source: Official YouTube &nbsp;•&nbsp; Loop</p>
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <span class="time" id="currentTime">0:00</span>
+        <input type="range" id="seek" min="0" max="100" step="0.1" value="0" aria-label="Seek">
+        <span class="time" id="totalTime">0:00</span>
+      </div>
+
+      <!-- Main controls — big, remote-friendly -->
+      <div class="controls">
+        <button id="prevBtn" class="btn btn-secondary" type="button" title="Previous track (P)">⏮&nbsp; Prev</button>
+        <button id="restartBtn" class="btn btn-secondary" type="button" title="Restart from the beginning">↺&nbsp; Restart</button>
+        <button id="playBtn" class="btn btn-play" type="button" aria-label="Play">▶&nbsp; Play</button>
+        <button id="loopBtn" class="btn btn-loop is-on" type="button" aria-pressed="true" title="Loop on/off (L)">⟳&nbsp; Loop: On</button>
+        <button id="nextBtn" class="btn btn-secondary" type="button" title="Next track (N)">Next &nbsp;⏭</button>
+      </div>
+
+      <!-- Volume + reverb row -->
+      <div class="controls-row">
+        <label class="slider-group">
+          <span class="slider-label">🔊 Volume</span>
+          <input type="range" id="volume" min="0" max="100" step="1" value="80" aria-label="Volume">
+          <span class="slider-value" id="volumeValue">80%</span>
+        </label>
+
+        <div class="reverb-group">
+          <button id="reverbBtn" class="btn btn-reverb" type="button" aria-pressed="false" title="Hall ambience on/off (R)">Reverb: Off</button>
+          <div class="preset-seg" id="presetSeg" role="group" aria-label="Reverb preset">
+            <button type="button" class="preset-btn is-on" data-preset="hall">Hall</button>
+            <button type="button" class="preset-btn" data-preset="temple">Temple</button>
+            <button type="button" class="preset-btn" data-preset="soft">Soft</button>
+          </div>
+          <label class="slider-group slider-compact">
+            <span class="slider-label">Intensity</span>
+            <input type="range" id="reverbIntensity" min="0" max="100" step="1" value="50" aria-label="Reverb intensity">
+            <span class="slider-value" id="reverbValue">50%</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Honest reverb note -->
+      <p class="honest-note">
+        About reverb — honestly: YouTube audio cannot be routed through the Web Audio API
+        (cross-origin), so the hall sound does <strong>not</strong> process the YouTube track itself.
+        When Reverb is on, you hear a clearly audible hall ambience underneath it — a soft
+        Raag Maajh drone (Sa–Pa–Sa) through a long hall reverb.
+        If you drop or choose your own MP3 of this track below, reverb <strong>does</strong> truly apply to that file.
+      </p>
+
+      <!-- Local file — real reverb path -->
+      <div class="local-wrap" id="dropZone">
+        <p class="local-title">Your own file — real reverb</p>
+        <p class="local-text">Drop an MP3 of this track here, or
+          <label class="file-link" for="localFile">choose a file</label>.
+          It plays locally in your browser and goes through a real convolver reverb. Nothing is uploaded.
+        </p>
+        <input type="file" id="localFile" accept="audio/*" hidden>
+        <p class="local-info" id="localInfo" hidden>
+          <span id="localName"></span>
+          <button id="backToYT" class="btn btn-small" type="button">Back to YouTube</button>
+        </p>
+      </div>
+
+      <p class="keys-hint">Keyboard: <kbd>Space</kbd> play / pause &nbsp;•&nbsp; <kbd>L</kbd> loop &nbsp;•&nbsp; <kbd>R</kbd> reverb &nbsp;•&nbsp; <kbd>N</kbd> next &nbsp;•&nbsp; <kbd>P</kbd> previous</p>
+
+      <!-- Official YouTube player.
+           Kept in the page (not display:none, so the IFrame API works) and
+           collapsible — the album art above is the visual, the iframe is the
+           audio source. Tap “Show video” to watch it. -->
+      <div class="yt-wrap" id="ytWrap">
+        <div id="player" aria-label="Official Sabad Naad YouTube player"></div>
+      </div>
+      <button id="showVideoBtn" class="btn btn-text" type="button" aria-expanded="false">Show video</button>
+
+      <footer class="footer">
+        Audio streams from official Sabad Naad YouTube —
+        <a id="ytLink" href="https://www.youtube.com/watch?v=KQ-wcUDV2a8" target="_blank" rel="noopener">Watch the official video on YouTube</a>
+        &nbsp;•&nbsp;
+        <a id="spotifyLink" href="https://open.spotify.com/search/Mann%20Simrat%20Thanda%20Theevan%20Jeeo%20Arijit%20Singh" target="_blank" rel="noopener">Search it on Spotify</a>
+        <br><span class="footer-small">No audio is hosted on this site.</span>
+      </footer>
+    </main>
+
+    <!-- Track library -->
+    <aside class="library" aria-label="Track library">
+      <div class="library-head">
+        <h2>Tracks</h2>
+        <span class="track-count" id="trackCount">20 tracks</span>
+      </div>
+      <label class="search-wrap">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <input type="search" id="trackSearch" placeholder="Search title, artist or raag…" aria-label="Search tracks" autocomplete="off">
+      </label>
+      <div class="vol-seg" id="volFilter" role="group" aria-label="Filter by volume">
+        <button type="button" class="vol-btn is-on" data-vol="all">All</button>
+        <button type="button" class="vol-btn" data-vol="1">Vol 1</button>
+        <button type="button" class="vol-btn" data-vol="2">Vol 2</button>
+        <button type="button" class="vol-btn" data-vol="3">Vol 3</button>
+        <button type="button" class="vol-btn" data-vol="4">Vol 4</button>
+        <button type="button" class="vol-btn" data-vol="5">Vol 5</button>
+        <button type="button" class="vol-btn" data-vol="6">Vol 6</button>
+      </div>
+      <ol class="track-list" id="trackList" role="listbox" aria-label="Sabad Naad tracks"></ol>
+      <p class="library-foot">20 verified Sabad Naad tracks · all 141 is the goal.<br>Every video is the official Sabad Naad upload.</p>
+    </aside>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="tracks.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
