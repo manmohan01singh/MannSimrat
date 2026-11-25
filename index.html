@@ -46,6 +46,19 @@
 
     <button id="playBtn" class="play-btn" type="button" aria-label="Play">▶</button>
 
+    <!-- Your own file (optional): plays from your device, real reverb,
+         only in file mode. The file never leaves the device. -->
+    <div class="file-ui" id="fileUi">
+      <button id="fileReverbBtn" class="mini-pill is-on" type="button" aria-pressed="true">Reverb: On</button>
+      <label class="mini-slider">
+        <span>Intensity</span>
+        <input type="range" id="fileReverbIntensity" min="0" max="100" step="1" value="50" aria-label="Reverb intensity">
+      </label>
+    </div>
+    <button id="fileBtn" class="file-pill" type="button">♪&nbsp; Apni file</button>
+    <input type="file" id="localFile" accept="audio/*" hidden>
+    <audio id="localAudio" preload="auto" hidden></audio>
+
     <!-- Official YouTube player: audio only, kept in layout (not display:none)
          so the IFrame API works. The album art above is the visual. -->
     <div id="player" aria-hidden="true"></div>

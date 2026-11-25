@@ -192,6 +192,95 @@ body {
 .play-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
 .play-btn.is-playing { padding-left: 0; }
 
+/* ---- Your own file: one small quiet pill under Play ---- */
+.file-pill {
+  font-family: inherit;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 16px;
+  min-height: 36px;
+  color: var(--ink-soft);
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 12px rgba(28, 37, 48, 0.06);
+  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
+}
+.file-pill:hover { color: var(--ink); }
+.file-pill:active { transform: scale(0.96); }
+.file-pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+/* Reverb controls — file mode only, hidden in YouTube mode */
+.file-ui {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.file-ui.show { display: flex; }
+.mini-pill {
+  font-family: inherit;
+  border: 1px solid var(--glass-border);
+  cursor: pointer;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 15px;
+  min-height: 36px;
+  color: var(--ink-soft);
+  background: var(--glass);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 12px rgba(28, 37, 48, 0.06);
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.mini-pill.is-on {
+  color: #fff;
+  background: linear-gradient(135deg, #c9a24a, var(--gold));
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(217, 180, 91, 0.35);
+}
+.mini-pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.mini-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.mini-slider input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 130px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold) var(--fill, 50%), #dbe4e6 var(--fill, 50%));
+  outline-offset: 4px;
+  cursor: pointer;
+}
+.mini-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(28, 37, 48, 0.22);
+  cursor: pointer;
+}
+.mini-slider input[type="range"]::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 3px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(28, 37, 48, 0.22);
+  cursor: pointer;
+}
+.mini-slider input[type="range"]:focus-visible { outline: 3px solid var(--accent); }
+
 /* ---- YouTube player: audio only, out of sight but in layout ---- */
 #player {
   position: absolute;
